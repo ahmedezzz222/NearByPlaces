@@ -17,7 +17,7 @@ import com.cognitev.nearbyapp.Ipermission.RuntimePermissionsActivity;
 public class SplashScreenActivity extends RuntimePermissionsActivity {
 
     private static final int REQUEST_PERMISSIONS = 20;
-    private static int SPLASH_TIME_OUT = 1000;
+    private static int SPLASH_TIME_OUT = 3000;
 
     @Override
     public void onPermissionsGranted(final int requestCode) {
