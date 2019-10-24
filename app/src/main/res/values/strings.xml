@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NearByApp</string>
+    <string name="realtime">Realtime</string>
+    <string name="near_by">Near By</string>
+    <string name="help">Help</string>
+    <string name="string_help_text">Help</string>
+    <string name="quit">Quit</string>
+    <string name="settings">Setting</string>
+    <string name="runtime_permissions_txt">Run Time Permissions</string>
+    <string name="no_data_found">NO Data Found !!</string>
+    <string name="something_went_wrong">Something went wrong</string>
+</resources>
