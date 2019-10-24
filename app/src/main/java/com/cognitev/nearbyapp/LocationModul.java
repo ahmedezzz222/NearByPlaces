@@ -1,6 +1,7 @@
 package com.cognitev.nearbyapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,6 +21,7 @@ import com.cognitev.nearbyapp.Utilites.SharedPref;
 import java.util.List;
 
 public class LocationModul {
+    @SuppressLint("StaticFieldLeak")
     private static LocationModul instance = null;
     private LocationListener onLocationChange = null;
     private LocationManager locationManager = null;
@@ -30,7 +32,7 @@ public class LocationModul {
 
 
     // singleton
-    public static LocationModul getInstance( ) {
+    static LocationModul getInstance() {
         if (instance == null) {
             synchronized (LocationModul.class) {
                 if (instance == null) {
@@ -41,7 +43,7 @@ public class LocationModul {
         return instance;
     }
 
-    public void startLocation(final Context context, final ListView listView) {
+      void startLocation(final Context context, final ListView listView) {
         try {
             if (context == null) {
                 return;
@@ -60,7 +62,7 @@ public class LocationModul {
                             SharedPref.SaveLATALONG(context,String.valueOf(location.getLongitude()),String.valueOf(location.getLatitude()));
 
 
-                            Log.i("locationtest",String.valueOf(location.getLongitude())+","+String.valueOf(location.getLatitude()));
+                            //Log.i("locationtest",String.valueOf(location.getLongitude())+","+String.valueOf(location.getLatitude()));
 
 
                             // update near places
@@ -94,7 +96,7 @@ public class LocationModul {
                             }
 
                             // TODO requestLocationUpdates( provider, long min time , float min distance
-                            locationManager.requestLocationUpdates(provider, Constant.LOCATION_DELAY_TIME_UNIT, (float) 1.0, onLocationChange);
+                            locationManager.requestLocationUpdates(provider, Constant.LOCATION_DELAY_TIME_UNIT, (float) 500.0, onLocationChange);
                         }
                     } catch (Throwable e) {
                         e.printStackTrace();
@@ -126,7 +128,7 @@ public class LocationModul {
         }
     }
 
-    public void destroy() {
+      void destroy() {
         try {
             if (locationManager != null) {
                 if (onLocationChange != null) {

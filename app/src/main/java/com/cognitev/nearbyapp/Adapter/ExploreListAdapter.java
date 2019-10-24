@@ -28,7 +28,7 @@ public class ExploreListAdapter extends ArrayAdapter<Item_> {
 		ImageView image_place;
 	}
 
-	Context ctx;
+	private Context ctx;
 
 	public ExploreListAdapter(Context context, int layout, List<Item_> objects) {
 		super(context, layout, objects);
@@ -50,9 +50,9 @@ public class ExploreListAdapter extends ArrayAdapter<Item_> {
 			LayoutInflater inflater = LayoutInflater.from(getContext());
 			convertView = inflater.inflate(R.layout.item_list, parent, false);
 
-			viewHolder.tvName = (TextView) convertView.findViewById(R.id.tv_item_name);
-			viewHolder.tvadress = (TextView) convertView.findViewById(R.id.tvadress);
-			viewHolder.image_place = (ImageView) convertView.findViewById(R.id.image_place);
+			viewHolder.tvName =   convertView.findViewById(R.id.tv_item_name);
+			viewHolder.tvadress =  convertView.findViewById(R.id.tvadress);
+			viewHolder.image_place =  convertView.findViewById(R.id.image_place);
 
 			// Cache the viewHolder object inside the fresh view
 			convertView.setTag(viewHolder);
@@ -63,20 +63,29 @@ public class ExploreListAdapter extends ArrayAdapter<Item_> {
 
 
 		// Get each data from "item_"
-		String name = item_.getVenue().getName();
+        String name = null;
+        if (item_ != null) {
+            name = item_.getVenue().getName();
+        }
 
-		viewHolder.tvName.setText(name);
+        viewHolder.tvName.setText(name);
 		String address="";
-		if (item_.getVenue().getLocation().getAddress() != null) {
-			 address= item_.getVenue().getLocation().getAddress();
+        if (item_ != null && item_.getVenue().getLocation().getAddress() != null) {
+            address = item_.getVenue().getLocation().getAddress();
 
-		}
-		viewHolder.tvadress.setText(String.valueOf(address));
+        }
+        viewHolder.tvadress.setText(String.valueOf(address));
 
-		String prefix = item_.getVenue().getCategories().get(0).getIcon().getPrefix();
-		String suffix = item_.getVenue().getCategories().get(0).getIcon().getSuffix();
+        String prefix = null;
+        if (item_ != null) {
+            prefix = item_.getVenue().getCategories().get(0).getIcon().getPrefix();
+        }
+        String suffix = null;
+        if (item_ != null) {
+            suffix = item_.getVenue().getCategories().get(0).getIcon().getSuffix();
+        }
 
- 		Picasso.with(ctx).load(prefix + "88" + suffix).into(viewHolder.image_place);
+        Picasso.with(ctx).load(prefix + "88" + suffix).placeholder(R.mipmap.img_placeholder).into(viewHolder.image_place);
 
 		// Return the completed view to render on screen
 		return convertView;

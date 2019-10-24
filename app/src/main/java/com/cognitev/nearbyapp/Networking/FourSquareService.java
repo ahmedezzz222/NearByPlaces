@@ -2,6 +2,7 @@ package com.cognitev.nearbyapp.Networking;
 
 
 import com.cognitev.nearbyapp.Model.VenuesExploreModel.Explore;
+import com.cognitev.nearbyapp.Utilites.Constant;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -24,7 +25,7 @@ public interface FourSquareService {
 
 
 	Retrofit retrofit = new Retrofit.Builder()
-			.baseUrl("https://api.foursquare.com/v2/")
+			.baseUrl(Constant.URL)
 			.addConverterFactory(GsonConverterFactory.create())
 			.build();
 }
