@@ -19,8 +19,7 @@ public interface FourSquareService {
             @Query("client_id") String client_id,
             @Query("client_secret") String client_secret,
             @Query("v") String v,
-            @Query("ll") String ll//,
-           // @Query("query") String query
+            @Query("ll") String ll
 	);
 
 
