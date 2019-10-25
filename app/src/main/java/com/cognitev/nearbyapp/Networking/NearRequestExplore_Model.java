@@ -1,5 +1,6 @@
 package com.cognitev.nearbyapp.Networking;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,28 +25,27 @@ import retrofit2.Response;
 
 public class NearRequestExplore_Model {
 
-    Context context;
-    List<Item_> item_list = new ArrayList<Item_>();
+    private Context context;
+    private List<Item_> item_list = new ArrayList<Item_>();
 
+    @SuppressLint("StaticFieldLeak")
     private static NearRequestExplore_Model instance = null;
 
-    public   NearRequestExplore_Model getInstance(Context ctx ) {
+    public NearRequestExplore_Model getInstance(Context ctx) {
         if (instance == null) {
             synchronized (ctx) {
                 if (instance == null) {
-                    instance = new NearRequestExplore_Model( );
+                    instance = new NearRequestExplore_Model();
                 }
             }
         }
-        this.context=ctx;
+        this.context = ctx;
         return instance;
     }
 
 
-    public void AllNearPlaces_API(final  Context cont, final ListView listView) {
+    public void AllNearPlaces_API(final Context cont, final ListView listView) {
         String latlong = SharedPref.RetriveLATALONG(cont);
-
-        //Utilis.init_Progress_Dialog(cont);
 
         FourSquareService fourSquareService = FourSquareService.retrofit.create(FourSquareService.class);
         final Call<Explore> call = fourSquareService.requestExplore(Constant.Client_ID, Constant.Client_Secret, Constant.apiVersion, latlong);//Constant.geoLocation);
@@ -60,10 +60,6 @@ public class NearRequestExplore_Model {
                                     item_list = response.body().getResponse().getGroups().get(0).getItems();
                                     ExploreListAdapter exploreListAdapter = new ExploreListAdapter(cont, R.layout.item_list, item_list);
                                     listView.setAdapter(exploreListAdapter);
-                                    //Utilis.Show_Progress_Dialog(cont);
-
-                                } else {
-                                    //Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -74,15 +70,14 @@ public class NearRequestExplore_Model {
 
             @Override
             public void onFailure(Call<Explore> call, Throwable t) {
-                //Utilis.Show_Progress_Dialog(cont);
+                //t.printStackTrace();
             }
         });
     }
 
-    public void AllNearPlaces_API_firstload(final  Context cont, final ListView listView,final ProgressBar progress) {
+    public void AllNearPlaces_API_firstload(final Context cont, final ListView listView, final ProgressBar progress) {
         String latlong = SharedPref.RetriveLATALONG(cont);
 
-        //Utilis.init_Progress_Dialog(cont);
         progress.setVisibility(View.VISIBLE);
 
         FourSquareService fourSquareService = FourSquareService.retrofit.create(FourSquareService.class);
@@ -99,8 +94,6 @@ public class NearRequestExplore_Model {
                                     ExploreListAdapter exploreListAdapter = new ExploreListAdapter(cont, R.layout.item_list, item_list);
                                     listView.setAdapter(exploreListAdapter);
                                     progress.setVisibility(View.GONE);
-                                } else {
-                                    //Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -111,11 +104,8 @@ public class NearRequestExplore_Model {
 
             @Override
             public void onFailure(Call<Explore> call, Throwable t) {
-                //Utilis.Show_Progress_Dialog(cont);
                 progress.setVisibility(View.GONE);
-
             }
         });
     }
-
 }

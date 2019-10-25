@@ -61,10 +61,6 @@ public class LocationModul {
                             // save location
                             SharedPref.SaveLATALONG(context,String.valueOf(location.getLongitude()),String.valueOf(location.getLatitude()));
 
-
-                            //Log.i("locationtest",String.valueOf(location.getLongitude())+","+String.valueOf(location.getLatitude()));
-
-
                             // update near places
                             new NearRequestExplore_Model().getInstance(context).AllNearPlaces_API(context,listView);
 
