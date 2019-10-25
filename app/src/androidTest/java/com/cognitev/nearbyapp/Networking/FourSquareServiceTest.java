@@ -8,5 +8,6 @@ public class FourSquareServiceTest {
 
     @Test
     public void requestExplore() {
+
     }
 }
