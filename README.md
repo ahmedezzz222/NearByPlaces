@@ -4,7 +4,7 @@ two mode to update list of places
   1- single mode for one time 
   2- realtime mode detect places depend on current location (500 m) 
   
-  Using <h2>Foursquare</h2> API gives you access to a large set of places around the world
+   <h2 >Foursquare</h2> Using Foursquare API gives you access to a large set of places around the world
   
 <div display: flex justify-content: center>
 <img src="https://user-images.githubusercontent.com/35667766/67552979-0ab0f100-f6c1-11e9-9aef-f4ed1800f0b7.png" width="300" height="500"/>
